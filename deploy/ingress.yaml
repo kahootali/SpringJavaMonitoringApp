@@ -1,0 +1,26 @@
+# Source: spring-monitoring-app/templates/ingress.yaml
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: spring-monitoring-app
+  labels:
+    app: spring-monitoring-app
+  annotations:
+    ingress.kubernetes.io/force-ssl-redirect: "true"
+    ingress.kubernetes.io/rewrite-target: /
+    kubernetes.io/ingress.class: nginx-mtls
+    nginx.ingress.kubernetes.io/ssl-passthrough: "true"
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+spec:
+  rules:
+    - host: spring-app.kahootali.com
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: spring-monitoring-app
+              servicePort: http
+  tls:
+    - hosts:
+      - spring-app.kahootali.com
+      secretName: tls-cert
