@@ -10,6 +10,10 @@ management:
       exposure:
         include: '*'
 
+logging:
+  level:
+    . = DEBUG
+
 server:
   port: 8443
   ssl:
@@ -22,4 +26,3 @@ server:
     # trust-store-type: pkcs12
     # trust-store: ${TRUSTSTORE}
     # trust-store-password: ${TRUSTSTORE_PASSWORD}
-    
