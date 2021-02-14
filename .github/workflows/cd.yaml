@@ -38,7 +38,7 @@ jobs:
       run: |
         IMAGE_TAG=${{ steps.generate_version.outputs.new_tag }}
         # Just Image name
-        IMAGE_NAME=${{ github.repository }}
+        IMAGE_NAME=$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')
         #Image ID= Name + Tag
         IMAGE_ID=$IMAGE_NAME:$IMAGE_TAG
         IMAGE_REPO=$REGISTRY/$IMAGE_ID
