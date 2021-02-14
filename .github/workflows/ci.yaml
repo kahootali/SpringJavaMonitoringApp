@@ -34,15 +34,16 @@ jobs:
         # Just Tag
         IMAGE_TAG=pr-${{ github.event.pull_request.number }}-$(echo ${{ github.event.pull_request.head.sha }} | cut -c1-8)
         # Just Image name
-        IMAGE_NAME=${{ github.repository }}
+        IMAGE_NAME=$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')
         #Image ID= Name + Tag
         IMAGE_ID=$IMAGE_NAME:$IMAGE_TAG
         IMAGE_REPO=$REGISTRY/$IMAGE_ID
-        echo "Image: $IMAGE_REPO"
-        echo "::set-output name=image::$IMAGE_REPO"
+        IMAGE_FULL_NAME=$(echo $IMAGE_REPO | tr '[:upper:]' '[:lower:]')
+        echo "Image: $IMAGE"
+        echo "::set-output name=image::$IMAGE"
         echo "::set-output name=image_name::$IMAGE_NAME"
         echo REPO=$IMAGE_NAME >> $GITHUB_ENV
-        echo IMAGE=$(echo "$REGISTRY/$IMAGE_ID") >> $GITHUB_ENV
+        echo IMAGE=$(echo "$IMAGE_FULL_NAME") >> $GITHUB_ENV
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v1
     - name: Set up Docker Buildx
