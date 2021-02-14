@@ -22,7 +22,7 @@ server:
     key-store: ${KEYSTORE}
     key-password: ${KEYSTORE_PASSWORD}
     key-store-password: ${KEYSTORE_PASSWORD}
-    client-auth: need
+    client-auth: want
     # trust-store-type: pkcs12
     # trust-store: ${TRUSTSTORE}
     # trust-store-password: ${TRUSTSTORE_PASSWORD}
