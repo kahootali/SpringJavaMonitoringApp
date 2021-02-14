@@ -1,0 +1,62 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  labels:
+    app: spring-monitoring-app
+  name: spring-monitoring-app
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: spring-monitoring-app
+  name: spring-monitoring-app
+spec:
+  selector:
+    app: spring-monitoring-app
+  ports:
+    - name: http
+      port: 8443
+      protocol: TCP
+      targetPort: 8443
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: spring-monitoring-app
+  name: spring-monitoring-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spring-monitoring-app
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: spring-monitoring-app
+    spec:      
+      containers:
+      - name: spring-monitoring-app
+        image: "kahootali/springjavamonitoringapp:pr-1-31f4a036"
+        imagePullPolicy: Always
+        env:
+          - name: KEYSTORE
+            value: /store-keys/kstore.p12
+          - name: KEYSTORE_PASSWORD
+            value: secret
+          # - name: TRUSTSTORE
+          #   value: /store-keys/tstore.p12
+          # - name: TRUSTSTORE_PASSWORD
+          #   value: secret
+        volumeMounts:
+        - mountPath: /store-keys
+          name: store
+      volumes:
+      - name: store
+        secret:
+          secretName: store
+      serviceAccountName: spring-monitoring-app
+---
