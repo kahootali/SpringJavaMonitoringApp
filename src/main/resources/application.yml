@@ -12,7 +12,7 @@ management:
 
 logging:
   level:
-    root : ALL
+    root : TRACE
 
 server:
   port: 8443
@@ -22,7 +22,7 @@ server:
     key-store: ${KEYSTORE}
     key-password: ${KEYSTORE_PASSWORD}
     key-store-password: ${KEYSTORE_PASSWORD}
-    client-auth: want
+    client-auth: need
     # trust-store-type: pkcs12
     # trust-store: ${TRUSTSTORE}
     # trust-store-password: ${TRUSTSTORE_PASSWORD}
