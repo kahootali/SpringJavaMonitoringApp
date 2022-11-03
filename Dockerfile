@@ -1,7 +1,10 @@
 FROM maven:3.6.3-openjdk-11-slim AS build
+WORKDIR /usr/src/app
+COPY pom.xml .
+RUN mvn dependency:go-offline -B
 COPY src /usr/src/app/src
-COPY pom.xml /usr/src/app
-RUN mvn -f /usr/src/app/pom.xml clean package
+RUN mvn clean package
+
 
 FROM registry.access.redhat.com/ubi8/openjdk-11
 

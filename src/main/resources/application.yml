@@ -12,17 +12,17 @@ management:
 
 logging:
   level:
-    root : DEBUG
+    root : INFO
 
 server:
-  port: 8443
-  ssl:
-    enabled: true
-    key-store-type: pkcs12
-    key-store: ${KEYSTORE}
-    key-password: ${KEYSTORE_PASSWORD}
-    key-store-password: ${KEYSTORE_PASSWORD}
-    client-auth: need
+  port: 8080
+  # ssl:
+  #   enabled: true
+  #   key-store-type: pkcs12
+  #   key-store: ${KEYSTORE}
+  #   key-password: ${KEYSTORE_PASSWORD}
+  #   key-store-password: ${KEYSTORE_PASSWORD}
+  #   client-auth: need
     # trust-store-type: pkcs12
     # trust-store: ${TRUSTSTORE}
     # trust-store-password: ${TRUSTSTORE_PASSWORD}
